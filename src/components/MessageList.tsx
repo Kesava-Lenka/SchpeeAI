@@ -5,34 +5,31 @@ type Message = {
 
 type MessageListProps = {
     messages: Message[];
+    isTyping: boolean;
 };
 
-function MessageList({ messages }: MessageListProps) {
-    if (messages.length === 0) {
-        return (
-            <div className="welcome-message">
-                <h1>How can I help?</h1>
-                <p>This is your personal AI assistant.</p>
-            </div>
-        );
-    }
-
+function MessageList({
+    messages,
+    isTyping,
+}: MessageListProps) {
     return (
         <div className="message-list">
+
             {messages.map((message, index) => (
                 <div
                     key={index}
-                    className={`message ${message.sender}`}
+                    className={`message ${message.sender}-message`}
                 >
-                    <div className="message-label">
-                        {message.sender === "user" ? "You" : "AI"}
-                    </div>
-
-                    <div className="message-text">
-                        {message.text}
-                    </div>
+                    {message.text}
                 </div>
             ))}
+
+            {isTyping && (
+                <div className="message ai-message typing">
+                    AI is thinking...
+                </div>
+            )}
+
         </div>
     );
 }

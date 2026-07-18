@@ -36,7 +36,7 @@ function App() {
         number | null
         >(null);
 
-
+    const [isTyping, setIsTyping] = useState(false);
 
     useEffect(() => {
         localStorage.setItem(
@@ -49,7 +49,9 @@ function App() {
         (conversation) =>
             conversation.id === activeConversationId
     );
-
+    function generateAIResponse(): string {
+        return "This is a temporary AI response.";
+    }
     function sendMessage() {
         if (message.trim() === "") {
             return;
@@ -102,11 +104,11 @@ function App() {
         );
 
         setMessage("");
-
+        setIsTyping(true);
         setTimeout(() => {
             const aiMessage: Message = {
                 sender: "ai",
-                text: "This is a temporary AI response.",
+                text: generateAIResponse(),
             };
 
             setConversations((previousConversations) =>
@@ -124,6 +126,8 @@ function App() {
                     return conversation;
                 })
             );
+
+            setIsTyping(false);
         }, 500);
     }
 
@@ -162,6 +166,7 @@ function App() {
                 <section className="messages">
                     <MessageList
                         messages={activeConversation?.messages ?? []}
+                        isTyping={isTyping}
                     />
                 </section>
 

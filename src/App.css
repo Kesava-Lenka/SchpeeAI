@@ -167,3 +167,30 @@
     .send-button:hover {
         background: #cccccc;
     }
+.typing {
+    opacity: 0.6;
+    font-style: italic;
+}
+.message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message {
+    max-width: 70%;
+    padding: 10px 14px;
+    border-radius: 12px;
+}
+
+.user-message {
+    align-self: flex-end;
+    background: #8B3F13;
+    color: white;
+}
+
+.ai-message {
+    align-self: flex-start;
+    background: #D1226E;
+    color: white;
+}
